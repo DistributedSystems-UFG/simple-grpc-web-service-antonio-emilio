@@ -9,12 +9,14 @@ empDB=[
  {
  'id':101,
  'name':'Saravanan S',
- 'title':'Technical Leader'
+ 'title':'Technical Leader',
+  'salary':100000
  },
  {
  'id':201,
  'name':'Rajkumar P',
- 'title':'Sr Software Engineer'
+ 'title':'Sr Software Engineer',
+  'salary':80000
  }
  ]
 
@@ -24,7 +26,8 @@ class EmployeeServer(EmployeeService_pb2_grpc.EmployeeServiceServicer):
     dat = {
     'id':request.id,
     'name':request.name,
-    'title':request.title
+    'title':request.title,
+    'salary':request.salary
     }
     empDB.append(dat)
     return EmployeeService_pb2.StatusReply(status='OK')
@@ -38,6 +41,15 @@ class EmployeeServer(EmployeeService_pb2_grpc.EmployeeServiceServicer):
     usr[0]['title'] = request.title
     return EmployeeService_pb2.StatusReply(status='OK')
 
+  def UpdateEmployeeSalary(self, request, context):
+    usr = [ emp for emp in empDB if (emp['id'] == request.id) ]
+    usr[0]['salary'] = request.salary
+    return EmployeeService_pb2.StatusReply(status='OK')
+
+  def GetEmployeeSalary(self, request, context):
+    usr = [ emp for emp in empDB if (emp['id'] == request.id) ]
+    return EmployeeService_pb2.SalaryReply(salary=usr[0]['salary'])
+
   def DeleteEmployee(self, request, context):
     usr = [ emp for emp in empDB if (emp['id'] == request.id) ]
     if len(usr) == 0:
@@ -49,7 +61,7 @@ class EmployeeServer(EmployeeService_pb2_grpc.EmployeeServiceServicer):
   def ListAllEmployees(self, request, context):
     list = EmployeeService_pb2.EmployeeDataList()
     for item in empDB:
-      emp_data = EmployeeService_pb2.EmployeeData(id=item['id'], name=item['name'], title=item['title']) 
+      emp_data = EmployeeService_pb2.EmployeeData(id=item['id'], name=item['name'], title=item['title'], salary=item['salary']) 
       list.employee_data.append(emp_data)
     return list
 

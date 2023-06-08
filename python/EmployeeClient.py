@@ -23,6 +23,14 @@ def run():
         response = stub.UpdateEmployeeTitle(EmployeeService_pb2.EmployeeTitleUpdate(id=301, title='Senior Programmer'))
         print ('Updated employee ' + response.status)
 
+        # Change an employee's salary
+        response = stub.UpdateEmployeeSalary(EmployeeService_pb2.EmployeeSalaryUpdate(id=301, salary=5000))
+        print ('Updated employee ' + response.status)
+
+        # Query an employee's salary
+        response = stub.GetEmployeeSalary(EmployeeService_pb2.EmployeeID(id=301))
+        print ('Employee\'s salary: ' + str(response))
+
         # Delete an employee
         response = stub.DeleteEmployee(EmployeeService_pb2.EmployeeID(id=201))
         print ('Deleted employee ' + response.status)

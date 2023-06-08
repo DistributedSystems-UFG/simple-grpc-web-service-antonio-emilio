@@ -23,6 +23,9 @@ service EmployeeService {
 
   // List all employees
   rpc ListAllEmployees (EmptyMessage) returns (EmployeeDataList) {}
+
+  // Get average salary
+  rpc AvgSalEmployees (EmptyMessage) returns (EmployeeDataList) {}
   
 }
 
@@ -30,6 +33,8 @@ message EmployeeData {
   uint32 id = 1;
   string name = 2;
   string title = 3;
+  float salary = 2500;
+  
 }
 
 message StatusReply {
