@@ -20,6 +20,9 @@ service EmployeeService {
 
   // Update an employee's salary
   rpc UpdateEmployeeSalary (EmployeeSalaryUpdate) returns (StatusReply) {}
+
+  // Get employee's salary
+  rpc GetEmployeeSalary (EmployeeSalary) returns (EmployeeData) {}
   
   // Delete an employee
   rpc DeleteEmployee (EmployeeID) returns (StatusReply) {}
@@ -46,6 +49,10 @@ message StatusReply {
 
 message EmployeeID {
   uint32 id = 1;
+}
+
+message EmployeeSalary {
+  float salary = 3000;
 }
 
 message EmployeeTitleUpdate {
