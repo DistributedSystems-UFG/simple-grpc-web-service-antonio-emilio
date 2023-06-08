@@ -22,7 +22,7 @@ service EmployeeService {
   rpc UpdateEmployeeSalary (EmployeeSalaryUpdate) returns (StatusReply) {}
 
   // Get employee's salary
-  rpc GetEmployeeSalary (EmployeeSalary) returns (EmployeeData) {}
+  rpc GetEmployeeSalary (EmployeeID) returns (EmployeeSalary) {}
   
   // Delete an employee
   rpc DeleteEmployee (EmployeeID) returns (StatusReply) {}
