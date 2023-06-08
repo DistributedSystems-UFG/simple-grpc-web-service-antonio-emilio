@@ -48,7 +48,7 @@ class EmployeeServer(EmployeeService_pb2_grpc.EmployeeServiceServicer):
 
   def GetEmployeeSalary(self, request, context):
     usr = [ emp for emp in empDB if (emp['id'] == request.id) ]
-    return EmployeeService_pb2.SalaryReply(salary=usr[0]['salary'])
+    return EmployeeService_pb2.EmployeeSalary(salary=usr[0]['salary'])
 
   def DeleteEmployee(self, request, context):
     usr = [ emp for emp in empDB if (emp['id'] == request.id) ]
